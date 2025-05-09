@@ -13,9 +13,9 @@ export class UploadResolver {
     return 'Hello World!';
   }
 
-  @Mutation(() => UploadFilesResponse)
+  @Mutation(() => UploadFilesResponse, { description: 'Files to upload' })
   async uploadFiles(
-    @Args('input') input: UploadFilesInput,
+    @Args('input', { description: 'Files to upload' }) input: UploadFilesInput,
   ): Promise<UploadFilesResponse> {
     return this.uploadService.uploadFiles(input);
   }

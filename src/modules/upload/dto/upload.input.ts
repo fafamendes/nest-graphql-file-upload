@@ -3,9 +3,9 @@ import { GraphQLUpload } from 'graphql-upload-ts';
 import { FileUpload } from 'graphql-upload-ts';
 import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
-@InputType()
+@InputType({ description: 'Upload files' })
 export class UploadFilesInput {
-  @Field(() => [GraphQLUpload])
+  @Field(() => [GraphQLUpload], { description: 'Files to upload' })
   @IsNotEmpty({ message: 'File is required' })
   files: Promise<FileUpload>[];
 

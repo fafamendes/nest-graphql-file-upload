@@ -1,0 +1,1 @@
+export const extractHashtags = (str: string) => str.match(/#\w+/g)?.map(tag => tag.slice(1)) || [];

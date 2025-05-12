@@ -3,9 +3,10 @@ import { GraphQLUpload } from 'graphql-upload-ts';
 import { FileUpload } from 'graphql-upload-ts';
 import { IsNotEmpty, IsOptional, IsString, MaxLength } from 'class-validator';
 
-@InputType({ description: 'Upload files' })
+
+@InputType({ description: 'Até 3 arquivos multipart' })
 export class UploadFilesInput {
-  @Field(() => [GraphQLUpload], { description: 'Files to upload' })
+  @Field(() => [GraphQLUpload], { description: 'Faça upload de até 3 arquivos multipart' })
   @IsNotEmpty({ message: 'File is required' })
   files: Promise<FileUpload>[];
 

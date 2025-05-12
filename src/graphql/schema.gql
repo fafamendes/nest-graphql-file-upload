@@ -27,9 +27,9 @@ type Mutation {
   ): UploadFilesResponse!
 }
 
-"""Upload files"""
+"""Até 3 arquivos multipart"""
 input UploadFilesInput {
-  """Files to upload"""
+  """Faça upload de até 3 arquivos multipart"""
   files: [Upload!]!
   description: String
   tags: String

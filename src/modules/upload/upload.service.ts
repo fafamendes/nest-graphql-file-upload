@@ -3,6 +3,8 @@ import { createWriteStream, mkdirSync, existsSync, statSync } from 'fs';
 import { join } from 'path';
 import { UploadFilesResponse, FileInfo } from './dto/upload.output';
 import { UploadFilesInput } from './dto/upload.input';
+import { FileUpload } from 'graphql-upload-ts';
+import { MaxFilesValidator } from './validators/max-files.validator';
 
 @Injectable()
 export class UploadService {
@@ -18,10 +20,16 @@ export class UploadService {
     }
   }
 
+  validateFiles(files: Promise<FileUpload>[]): void {
+    if (!new MaxFilesValidator().validate(files, 3)) throw new Error('Maximum number of files exceeded');
+  }
+
   async uploadFiles(input: UploadFilesInput): Promise<UploadFilesResponse> {
     const { files, description } = input;
     const uploadedFiles: FileInfo[] = [];
     let totalSize = 0;
+
+    this.validateFiles(files);
 
     for (const filePromise of files) {
       const file = await filePromise;
